@@ -55,6 +55,8 @@ Your `config.md` and team files are not in the repo, so an update does not touch
 
 Propose a change as a pull request for a maintainer to review and merge. The skill offers one whenever it changes a file tracked in this repo. It opens one only on your go, and merges one only when you tell it to for that pull request.
 
+Each pull request's description has two sections, "What changed" and "What to do now". When it merges, the title, those two sections and the link are posted to the team's channel. That needs a Slack incoming webhook stored as the secret `SLACK_WEBHOOK_URL` in a repo environment named `announce`; without it, nothing is posted.
+
 ## Files
 
 | File | Purpose |

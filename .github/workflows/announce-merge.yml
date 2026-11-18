@@ -1,0 +1,67 @@
+name: Announce merged pull request
+
+# Posts a merged pull request's title, its "What changed" and "What to do now"
+# sections, and its link to the team's channel.
+#
+# It never checks out or runs code from the pull request. The title and
+# description are passed in as environment variables and are only ever
+# handled as text.
+
+on:
+  pull_request_target:
+    types: [closed]
+
+permissions: {}
+
+jobs:
+  announce:
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    environment: announce
+    steps:
+      - name: Post to the team's channel
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${SLACK_WEBHOOK_URL:-}" ]; then
+            echo "::notice::SLACK_WEBHOOK_URL is not set in the announce environment; nothing posted."
+            exit 0
+          fi
+
+          # Escape the three characters Slack treats as markup, so text from a
+          # pull request cannot create mentions or links.
+          escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'; }
+
+          title=$(printf '%s' "$PR_TITLE" | tr -d '\r' | escape)
+
+          # Keep the description from "## What changed" down to the attribution
+          # footer, drop template comments, and turn Markdown headings, bold and
+          # fenced-code language tags into Slack's form.
+          body=$(printf '%s\n' "${PR_BODY:-}" | tr -d '\r' \
+            | perl -0pe 's/<!--.*?-->//gs' \
+            | awk '/^## What changed/ {on=1} /^🤖/ {on=0} on' \
+            | escape \
+            | sed -e 's/^## \(.*\)$/*\1*/' \
+                  -e 's/\*\*\([^*]*\)\*\*/*\1*/g' \
+                  -e 's/^```[a-z]*$/```/' \
+            | cat -s)
+
+          # Long descriptions are cut at 2500 characters.
+          payload=$(jq -n --arg title "$title" --arg body "$body" --arg url "$PR_URL" '
+            {text: (
+              "*Support skill updated: " + $title + "*\n\n"
+              + (if $body == "" then "" else $body[0:2500] + "\n\n" end)
+              + $url
+            )}')
+
+          curl -sS --fail-with-body -X POST \
+            -H 'Content-Type: application/json' \
+            --data "$payload" \
+            "$SLACK_WEBHOOK_URL"
