@@ -53,7 +53,7 @@ Your `config.md` and team files are not in the repo, so an update does not touch
 
 ## Changing the skill
 
-Propose a change as a pull request for a maintainer to review and merge. The skill offers one whenever it changes a file tracked in this repo. It opens one only on your go, and merges one only when you tell it to.
+Propose a change as a pull request for a maintainer to review and merge. The skill offers one whenever it changes a file tracked in this repo. It opens one only on your go, and merges one only when you tell it to for that pull request.
 
 ## Files
 
