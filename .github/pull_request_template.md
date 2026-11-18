@@ -4,4 +4,4 @@
 
 ## What to do now
 
-<!-- What people need to do after this merges, or "Nothing". -->
+<!-- One command people can paste after this merges, in a code block, or the word "Nothing". -->
