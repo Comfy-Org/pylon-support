@@ -39,8 +39,9 @@ If a ticket needs a team file that is missing, say so. Prepare no refund, credit
 1. Load the tools in one ToolSearch call: the Chrome set (`tabs_context_mcp`, `tabs_create_mcp`, `tabs_close_mcp`, `navigate`, `computer`, `javascript_tool`, `browser_batch`, `get_page_text`, `find`) and the Pylon set (`get_issue`, `get_issue_messages`, `search_issues`, `send_issue_reply`, `update_issue`). Load Stripe, Datadog, Linear, Slack and the Comfy Cloud catalog when a ticket needs them. In a new session the Cloud catalog may expose only `authenticate` until the owner signs in.
 2. Run `tabs_context_mcp {"createIfEmpty": true}`. If no browser is connected, ask the owner to run `/chrome` and wait.
 3. Read `config.md`, and `references/local-rules.md` if it exists.
-4. If the owner has not said which tickets to work, ask in one line: their own assigned tickets, a section of a view (with a starting ticket and a direction, or random), or unassigned tickets.
-5. When working a view, open it in a tab (link in `config.md`). The owner scrolls it; you read what they are on (`references/view-order.md`).
+4. Check whether this skill is up to date: in this folder, run `git fetch` and compare with the repo's main branch. If the local copy is behind, say so in one line and update it with `git pull --ff-only` on the owner's go. If a tracked file has local changes, say so and handle them under section 10. If the folder is not a git checkout or the fetch fails, say so and carry on.
+5. If the owner has not said which tickets to work, ask in one line: their own assigned tickets, a section of a view (with a starting ticket and a direction, or random), or unassigned tickets.
+6. When working a view, open it in a tab (link in `config.md`). The owner scrolls it; you read what they are on (`references/view-order.md`).
 
 ## 2. Which ticket is next, and who it is assigned to
 
@@ -167,7 +168,7 @@ When the owner corrects how support is done, make the change in the same turn an
 
 - a lasting personal preference goes in `config.md`;
 - a rule internal to the team goes in `references/local-rules.md` or the team file it belongs to;
-- a change that applies to everyone: draft it and ask the owner before opening a pull request. Put no names, ticket numbers or customer details in it.
+- a change to a file tracked in the repo: show the owner the diff and offer a pull request. Open it only on their go, from a branch, never by pushing to the main branch. A maintainer reviews and merges it on GitHub; never merge it yourself. Write the title as a plain one-line update, because that is what the team sees when the merge is announced. Put no names, ticket numbers or customer details in it. Once it is merged, draft a short update for the team (what changed, and what to do, if anything) for the owner to post.
 
 Have one fresh reader re-check the changed lines.
 

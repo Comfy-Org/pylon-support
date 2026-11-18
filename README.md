@@ -43,6 +43,18 @@ cp config.example.md config.md
 
 Fill in `config.md`, add your team's files (below), then start with `/support`.
 
+## Update
+
+```sh
+git -C ~/.claude/skills/support pull
+```
+
+Your `config.md` and team files are not in the repo, so an update does not touch them. The skill also checks at the start of each session whether it is out of date and offers to update.
+
+## Changing the skill
+
+Changes go through a pull request that a code owner reviews and merges. The skill offers one whenever it changes a file tracked in this repo; it does not open or merge one by itself.
+
 ## Files
 
 | File | Purpose |
