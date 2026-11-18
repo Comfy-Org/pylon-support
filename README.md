@@ -20,7 +20,7 @@ A Claude Code skill for working Comfy support tickets in Pylon, one ticket at a 
 | Stripe connector and a Stripe dashboard login | Charges, refunds and subscription state | For billing tickets |
 | Linear connector | Whether a bug is already tracked | For bug tickets |
 | Datadog connector | How widespread a fault is and since when | For bug tickets |
-| Slack connector | Searching earlier discussion (read-only) | Optional |
+| Slack connector | Searching earlier discussion; checking that a skill update was posted (read-only) | Optional |
 | Comfy Cloud connector | Whether a model, node or template is on Cloud | Optional |
 | Web access | Docs, the Registry API, public GitHub | Optional |
 
