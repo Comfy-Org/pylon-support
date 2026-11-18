@@ -55,6 +55,8 @@ Your `config.md` and team files are not in the repo, so an update does not touch
 
 Propose a change as a pull request for a maintainer to review and merge. The skill offers one whenever it changes a file tracked in this repo. It opens one only on your go, and merges one only when you tell it to for that pull request.
 
+Each pull request's description has two headings, `## What changed` and `## What to do now`. When it merges, an update made from the title, those two sections and the link is posted to the team's update channel. The post is made by an automation outside this repo, so the repo holds no secret for it.
+
 ## Files
 
 | File | Purpose |

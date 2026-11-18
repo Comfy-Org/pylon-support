@@ -14,6 +14,7 @@ Copy this file to `config.md` and fill it in. `config.md` is not tracked.
 | Stripe payment page | `https://dashboard.stripe.com/<stripe account id>/payments/<payment id>` |
 | Stripe account id | `<acct_...>` |
 | Bug channel | `<#channel>` (`<channel id>`) |
+| Skill update channel | `<#channel>` (`<channel id>`) |
 | Team, for watcher reports | `<name>` `<Pylon user id>` · `<name>` `<Pylon user id>` |
 
 ## Per person
